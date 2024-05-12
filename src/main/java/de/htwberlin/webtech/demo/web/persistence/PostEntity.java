@@ -1,31 +1,41 @@
-package de.htwberlin.webtech.demo.web.api;
+package de.htwberlin.webtech.demo.web.persistence;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity(name ="Post")
+public class PostEntity {
 
-public class Post {
-
-
+    @Id // Primärschlüssel
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "title", nullable = false)
     private String title;
 
+    @Column(name = "content", nullable = false)
     private String content;
 
+    @Column(name = "author", nullable = false)
     private String author;
 
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    public Post(long id, String title, String content, String author, LocalDateTime createdAt) {
-        this.id=id;
+
+    public PostEntity( String title, String content, String author, LocalDateTime createdAt) {
         this.title = title;
         this.content = content;
         this.author = author;
         this.createdAt = createdAt;
     }
 
+    // Standardkonstruktor für JPA
+    public PostEntity() {
+        this.createdAt = LocalDateTime.now();
+    }
 
+    // Getters und Setters für die Attribute
     public Long getId() {
         return id;
     }
