@@ -1,4 +1,4 @@
-package de.htwberlin.webtech.demo.web;
+package de.htwberlin.webtech.demo.web.api;
 
 import javax.persistence.*;
 import java.util.List;

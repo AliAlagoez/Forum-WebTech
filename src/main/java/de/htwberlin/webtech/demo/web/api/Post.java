@@ -1,5 +1,4 @@
-package de.htwberlin.webtech.demo.web;
-
+package de.htwberlin.webtech.demo.web.api;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,12 +16,23 @@ public class Post {
 
     @Column(name = "content", nullable = false)
     private String content;
+
     @Column(name = "author", nullable = false)
     private String author;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+
+    public Post(long id, String title, String content, String author, LocalDateTime createdAt) {
+        this.id=id;
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.createdAt = createdAt;
+    }
+
+    // Standardkonstruktor für JPA
     public Post() {
         this.createdAt = LocalDateTime.now();
     }
