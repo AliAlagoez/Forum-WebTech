@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Genre") // Name der Datenbanktabelle
+@Table(name = "Genre") // Name der Datenbanktabelleasd
 public class Genre {
 
 
