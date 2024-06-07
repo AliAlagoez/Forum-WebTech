@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 
 @RestController
-@CrossOrigin(origins = {"https://forum-webtech-frontend.onrender.com"})
+@CrossOrigin(origins = {"https://forum-webtech-frontend.onrender.com", "http://localhost:7777", "http://localhost:8080"})
 public class Controller {
 
-    @GetMapping("/")
+    @GetMapping("/post")
     public List<Post> index() {
         //test
-        Post entry = new Post(3, "Test", "Test", "Test", null);
+        Post entry = new Post(3, "Test", "Test", "Test25", null);
 
         return List.of(entry);
     }
