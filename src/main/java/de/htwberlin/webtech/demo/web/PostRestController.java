@@ -1,27 +1,35 @@
 package de.htwberlin.webtech.demo.web;
 
-import de.htwberlin.webtech.demo.web.api.Post;
+import de.htwberlin.webtech.demo.web.persistence.PostEntity;
+import de.htwberlin.webtech.demo.repository.PostRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequestMapping("/Post")
 @RestController
+@CrossOrigin(origins = {"http://localhost:7777", "http://127.0.0.1:7777", "https://forum-webtech-frontend.onrender.com"})
 public class PostRestController {
 
-    private List<Post> posts;
+    private final PostRepository postRepository;
+    private List<PostEntity> posts;
 
-    public PostRestController(){
+    public PostRestController(PostRepository postRepository) {
+        this.postRepository = postRepository;
         posts = new ArrayList<>();
-        posts.add(new Post(1,"Mein Titel", "Hier ist mein Post ich schreibe irgendwas nutzloses", "Bernd77", LocalDateTime.of(2024, 5, 11, 10, 30)));
-        posts.add(new Post(2,"Änten frage", "können Änten tauchen und wen ja wie lange xD", "SnipeMaster", LocalDateTime.of(2024, 7, 21, 3, 55)));
     }
 
-    @GetMapping(path = "/api/v1/posts")
-    public ResponseEntity<List<Post>> fetchPosts(){
-      return ResponseEntity.ok(posts);
+    @GetMapping("/post")
+    public ResponseEntity<List<PostEntity>> fetchPosts() {
+        return ResponseEntity.ok(postRepository.findAll());
+    }
+
+    @PostMapping("/post")
+    public ResponseEntity<PostEntity> postBruh(@RequestBody PostEntity post) {
+        PostEntity savedPost = postRepository.save(post);
+        return ResponseEntity.ok(savedPost);
     }
 }

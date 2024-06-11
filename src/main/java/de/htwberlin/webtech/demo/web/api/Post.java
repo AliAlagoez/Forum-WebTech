@@ -1,12 +1,15 @@
 package de.htwberlin.webtech.demo.web.api;
 
-import javax.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.time.LocalDateTime;
 
-
+@Entity
 public class Post {
 
 
+    @Id
     private Long id;
 
     private String title;
@@ -25,14 +28,12 @@ public class Post {
         this.createdAt = createdAt;
     }
 
+    public Post() {
 
-    public Long getId() {
-        return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+
+
 
     public String getTitle() {
         return title;
@@ -64,5 +65,13 @@ public class Post {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

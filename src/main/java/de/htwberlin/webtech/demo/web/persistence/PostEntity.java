@@ -1,29 +1,29 @@
 package de.htwberlin.webtech.demo.web.persistence;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
-@Entity(name ="Post")
+@Entity
 public class PostEntity {
 
-    @Id // Primärschlüssel
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title", nullable = false)
+    @Column(nullable = false)
     private String title;
 
-    @Column(name = "content", nullable = false)
+    @Column(nullable = false)
     private String content;
 
-    @Column(name = "author", nullable = false)
+    @Column(nullable = false)
     private String author;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
-
-    public PostEntity( String title, String content, String author, LocalDateTime createdAt) {
+    public PostEntity(String title, String content, String author, LocalDateTime createdAt) {
         this.title = title;
         this.content = content;
         this.author = author;
