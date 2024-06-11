@@ -18,6 +18,6 @@ public class Controller {
         Post entry = new Post(3, "Test", "Test", "Test25", null);
 
         return List.of(entry);
-    }
+    } //s
 
 }
