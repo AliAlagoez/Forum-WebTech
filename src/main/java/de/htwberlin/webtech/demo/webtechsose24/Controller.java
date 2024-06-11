@@ -16,7 +16,7 @@ public class Controller {
     public List<Post> index() {
         //test
         Post entry = new Post(3, "Test", "Test", "Test25", null);
-        Post sentry = new Post(2, "Tests", "Tesat", "Testd25", null);
+        Post sentry = new Post(2, "Tests", "Tesat", "Testd25", null); //a
 
 
         return List.of(entry);
