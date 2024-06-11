@@ -19,7 +19,7 @@ public class Controller {
         Post sentry = new Post(2, "Tests", "Tesat", "Testd25", null); //a
 
 
-        return List.of(entry);
+        return List.of(entry, sentry);
     } //s
 
 }
