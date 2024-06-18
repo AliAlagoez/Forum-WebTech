@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/Post")
-@RestController
+@RestController //asd
 @CrossOrigin(origins = {"http://localhost:7777", "http://127.0.0.1:7777", "https://forum-webtech-frontend.onrender.com"})
 public class PostRestController {
 
