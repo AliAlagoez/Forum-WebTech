@@ -5,7 +5,6 @@ import de.htwberlin.webtech.demo.repository.PostRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RequestMapping("/Post")
@@ -27,5 +26,15 @@ public class PostRestController {
     @PostMapping("/post")
     public ResponseEntity<PostEntity> postBruh(@RequestBody PostEntity post) {
         return this.postRepository.save(post) != null ? ResponseEntity.ok(post) : ResponseEntity.badRequest().build();
+    }
+
+    @DeleteMapping("/post/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable Long id) {
+        if (postRepository.existsById(id)) {
+            postRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
