@@ -4,6 +4,7 @@ import de.htwberlin.webtech.demo.web.PostRestController;
 import de.htwberlin.webtech.demo.web.persistence.PostEntity;
 import de.htwberlin.webtech.demo.repository.PostRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -32,6 +33,7 @@ public class PostRestControllerTest {
     }
 
     @Test
+    @DisplayName("Test, ob fetchPosts() alle Posts korrekt zurückgibt")
     public void testFetchPosts() {
         PostEntity post1 = new PostEntity("JO", "echt nicht", "Mois", LocalDateTime.now());
         PostEntity post2 = new PostEntity("dbg","ggg","Boss",LocalDateTime.now());
@@ -45,8 +47,9 @@ public class PostRestControllerTest {
         assertEquals(2, response.getBody().size()); // Assuming there are two posts in the mock data
     }
     @Test
+    @DisplayName("Test, ob postBruh() einen neuen Post erfolgreich speichert")
     public void testPostBruh() {
-        PostEntity newPost = new PostEntity("New Title", "New Content", "New Author", LocalDateTime.now());
+        PostEntity newPost = new PostEntity("Blaba", "Mhm Okö", "Haha", LocalDateTime.now());
         when(mockRepository.save(any(PostEntity.class))).thenReturn(newPost);
 
         ResponseEntity<PostEntity> response = controller.postBruh(newPost);
@@ -56,6 +59,7 @@ public class PostRestControllerTest {
     }
 
     @Test
+    @DisplayName("Test, ob deletePost() einen Post erfolgreich löscht")
     public void testDeletePost() {
         Long postId = 1L;
         when(mockRepository.existsById(postId)).thenReturn(true);
@@ -66,10 +70,11 @@ public class PostRestControllerTest {
     }
 
     @Test
+    @DisplayName("Test, ob updatePost() einen vorhandenen Post erfolgreich aktualisiert")
     public void testUpdatePost() {
         Long postId = 1L;
-        PostEntity existingPost = new PostEntity("Existing Title", "Existing Content", "Existing Author", LocalDateTime.now());
-        PostEntity updatedPost = new PostEntity( "Updated Title", "Updated Content", "Updated Author", LocalDateTime.now());
+        PostEntity existingPost = new PostEntity("Real", "auf trocken", "Apored", LocalDateTime.now());
+        PostEntity updatedPost = new PostEntity( "update", "jo", "Bernd", LocalDateTime.now());
 
         when(mockRepository.findById(postId)).thenReturn(Optional.of(existingPost));
         when(mockRepository.save(any(PostEntity.class))).thenReturn(updatedPost);
