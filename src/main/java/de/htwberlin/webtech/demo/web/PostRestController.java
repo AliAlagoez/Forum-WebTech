@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/Post")
 @RestController
@@ -24,7 +25,7 @@ public class PostRestController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<PostEntity> postBruh(@RequestBody PostEntity post) {
+    public ResponseEntity<PostEntity> postBruh( @RequestBody PostEntity post) {
         return this.postRepository.save(post) != null ? ResponseEntity.ok(post) : ResponseEntity.badRequest().build();
     }
 
@@ -33,6 +34,20 @@ public class PostRestController {
         if (postRepository.existsById(id)) {
             postRepository.deleteById(id);
             return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @PutMapping("/post/{id}")
+    public ResponseEntity<PostEntity> updatePost(@PathVariable Long id, @RequestBody PostEntity updatedPost) {
+        Optional<PostEntity> optionalPost = postRepository.findById(id);
+        if (optionalPost.isPresent()) {
+            PostEntity existingPost = optionalPost.get();
+            existingPost.setTitle(updatedPost.getTitle());
+            existingPost.setContent(updatedPost.getContent());
+
+            PostEntity savedPost = postRepository.save(existingPost);
+            return ResponseEntity.ok(savedPost);
         } else {
             return ResponseEntity.notFound().build();
         }
